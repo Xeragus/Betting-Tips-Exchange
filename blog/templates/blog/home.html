@@ -1,0 +1,23 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      {% for tip in tips %}
+        <div class="py-3 px-5 my-5 bg-white border border-secondary">
+          <h5>{{ tip }}</h5>
+          <span>by <a href="#">{{ tip.author }}</a> on {{ tip.date_posted|date:"F d, Y" }}</span><br>
+          <span><strong>Prediction: {{ tip.prediction }}</strong></span><br>
+          <span>Odds: {{ tip.odds }}</span><br>
+          <hr>
+          <span>{{ tip.analysis }}</span>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="col-sm-4 bg-dark my-5">
+      <p>sidebar</p>
+    </div>
+  </div>
+
+</div>
+{% endblock content %}
