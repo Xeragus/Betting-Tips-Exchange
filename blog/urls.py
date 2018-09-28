@@ -1,6 +1,17 @@
 from django.urls import path
 from . import views
+from .views import (
+            HomeListView,
+            BettingTipDetailView,
+            BettingTipCreateView,
+            BettingTipUpdateView,
+            BettingTipDeleteView,
+)
 
 urlpatterns = [
-    path('', views.home, name='dashboard'),
+    path('', HomeListView.as_view(), name='dashboard'),
+    path('betting-tip/<int:pk>/', BettingTipDetailView.as_view(), name='tip-detail'),
+    path('betting-tip/new', BettingTipCreateView.as_view(), name='tip-create'),
+    path('betting-tip/<int:pk>/update', BettingTipUpdateView.as_view(), name="tip-update"),
+    path('betting-tip/<int:pk>/delete', BettingTipDeleteView.as_view(), name="tip-delete"),
 ]

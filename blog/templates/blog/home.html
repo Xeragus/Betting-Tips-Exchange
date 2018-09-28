@@ -1,21 +1,54 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<div class="container">
-  <div class="row">
+<div class="container py-5">
+  <div class="row justify-content-center">
     <div class="col-sm-8">
       {% for tip in tips %}
-        <div class="py-3 px-5 my-5 bg-white border border-secondary">
-          <h5>{{ tip }}</h5>
-          <span>by <a href="#">{{ tip.author }}</a> on {{ tip.date_posted|date:"F d, Y" }}</span><br>
-          <span><strong>Prediction: {{ tip.prediction }}</strong></span><br>
-          <span>Odds: {{ tip.odds }}</span><br>
-          <hr>
-          <span>{{ tip.analysis }}</span>
+        <div class="accordion mb-5" id="tipAccordion-{{ tip.id }}">
+          <div class="card">
+            <div class="card-header" id="heading-{{ tip.id }}">
+              <h5 class="mb-0">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items">
+                    <div class="">
+                      <a href="#"><img src="{{ tip.author.profile.image.url }}" class="rounded-circle" style="width: 80px"></a>
+                    </div>
+                    <div class="">
+                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-{{ tip.id }}" aria-expanded="false" aria-controls="collapse-{{ tip.id }}">
+                          <h5 class="mb-0 ml-3">{{ tip }}</h5>
+                      </button><br>
+                      <small class="pl-4 ml-1">by <a href="#">{{ tip.author }}</a> on {{ tip.date_posted|date:"F d, Y" }}</small>
+                    </div>
+                  </div>
+                  <div class="button-group">
+                    <a class="mx-2" href="{% url 'tip-detail' tip.id %}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                    <a class="mx-2" href="#"><i class="fas fa-thumbs-up"></i></a>
+                    <a class="mx-2" href="#"><i class="fas fa-thumbs-down"></i></a>
+                  </div>
+                </div>
+
+              </h5>
+            </div>
+            <div id="collapse-{{ tip.id }}" class="collapse" aria-labelledby="heading-{{ tip.id }}" data-parent="#tipAccordion-{{ tip.id }}">
+              <div class="card-body">
+                <span>Prediction: <strong>{{ tip.prediction }}</strong></span><br>
+                <span>Odds: <strong>{{ tip.odds }}</strong></span><br>
+                <span>Analysis: <strong>{{ tip.analysis }}</strong></span>
+              </div>
+            </div>
+          </div>
         </div>
       {% endfor %}
     </div>
-    <div class="col-sm-4 bg-dark my-5">
-      <p>sidebar</p>
+    <div class="col-sm-4">
+      <ul class="list-group">
+        <a href="{% url 'tip-create' %}"><li class="list-group-item bg-light">Add new betting tip</li></a>
+        <a href="#"><li class="list-group-item bg-light">List all my betting tips</li></a>
+        <a href="#"><li class="list-group-item bg-light">Lorem ipsum kips</li></a>
+        <a href="#"><li class="list-group-item bg-light">Ipsum dogen troken bas</li></a>
+        <a href="#"><li class="list-group-item bg-light">Lara kaplum toro el</li></a>
+        <a href="#"><li class="list-group-item bg-light">Ila ipsa sila mu</li></a>
+      </ul>
     </div>
   </div>
 
