@@ -1,0 +1,58 @@
+[
+  {
+    "home_team": "Real Madrid",
+    "away_team": "Atletico Bilbao",
+    "prediction": "1",
+    "odds": "1.3",
+    "analysis": "by far the better team in this game",
+    "author_id": 2
+  },
+  {
+    "home_team": "Tottenham",
+    "away_team": "Watford",
+    "prediction": "2",
+    "odds": "1.9",
+    "analysis": "it's Spurs, so obviously...",
+    "author_id": 2
+  },
+  {
+    "home_team": "Everton",
+    "away_team": "Chelsea",
+    "prediction": "X",
+    "odds": "3",
+    "analysis": "tough game here",
+    "author_id": 4
+  },
+  {
+    "home_team": "Huddersfield",
+    "away_team": "Leicester",
+    "prediction": "1",
+    "odds": "1.9",
+    "analysis": "home supporters will influence this game",
+    "author_id": 4
+  },
+  {
+    "home_team": "Celta",
+    "away_team": "Real Sociedad",
+    "prediction": "X",
+    "odds": "3.1",
+    "analysis": "derby match, it can go either way but a draw is most likely",
+    "author_id": 4
+  },
+  {
+    "home_team": "Hertha",
+    "away_team": "Bayern",
+    "prediction": "1",
+    "odds": "2.9",
+    "analysis": "Hertha is strong at home",
+    "author_id": 4
+  },
+  {
+    "home_team": "Leverkusen",
+    "away_team": "Werder Bremen",
+    "prediction": "X",
+    "odds": "3.3",
+    "analysis": "a big match, a draw is my tip",
+    "author_id": 2
+  }
+]

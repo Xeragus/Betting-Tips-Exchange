@@ -1,0 +1,83 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="container">
+  <div class="row mt-5">
+    <div class="col-sm-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-sm-8 d-flex align-items-center">
+              <img src="{{ tips.0.author.profile.image.url }}" class="rounded-circle" style="width: 80px">
+              <h3 class="mb-0 ml-3">{{ view.kwargs.username }}</h3>
+            </div>
+            {% if tips.0.author == user %}
+            <div class="col-sm-4 d-flex justify-content-end">
+              <a class="mx-2" href="{% url 'tip-update' object.id %}"><i class="fas fa-edit fa-2x"></i></a>
+              <a class="mx-2" href="{% url 'tip-delete' object.id %}"><i class="fas fa-trash fa-2x"></i></a>
+            </div>
+            {% else %}
+            <div class="col-sm-4 d-flex justify-content-end like-comment-section">
+              <div class="position-relative">
+                <a class="mx-2 btn btn-primary" href="#"><i class="fas fa-user-plus"></i> Follow</a>
+              </div>
+              <div class="position-relative">
+                <a class="mx-2 btn btn-primary" href="#"><i class="fas fa-comment"></i> Send a message</a>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          <div class="profile-stats my-4">
+            <p class="mb-0">Success rate: 44%</p>
+            <p class="mb-0">Favourite leage: English Premier League</p>
+            <p class="mb-0">Average tip's odds: 1.9</p>
+            <p class="mb-0">Number of tips: {{ page_obj.paginator.count }}</p>
+          </div>
+          <hr>
+          {% for tip in tips %}
+          <div class="card mb-4">
+            <div class="card-body">
+              <div class="row align-items-center">
+                <div class="col-sm-8 d-flex align-items-center">
+                  <a href="{% url 'tip-detail' tip.id %}" class="card-title mb-0 ml-3">
+                    <h4 class="mb-0">{{ tip }}</h4>
+                  </a>
+                </div>
+                {% if tip.author == user %}
+                <div class="col-sm-4 d-flex justify-content-end">
+                  <a class="mx-2" href=""><i class="fas fa-edit fa-2x"></i></a>
+                  <a class="mx-2" href=""><i class="fas fa-trash fa-2x"></i></a>
+                </div>
+                {% else %}
+                <div class="col-sm-4 d-flex justify-content-end like-comment-section">
+                  <div class="position-relative mx-2">
+                    <a class="mx-2" href="#"><i class="fas fa-thumbs-up fa-2x"></i></a>
+                    <span class="badge badge-success position-absolute">51</span>
+                  </div>
+                  <div class="position-relative mx-2">
+                    <a class="mx-2" href="#"><i class="fas fa-thumbs-down fa-2x"></i></a>
+                    <span class="badge badge-danger position-absolute">44</span>
+                  </div>
+                  <div class="position-relative mx-2">
+                    <a class="mx-2" href="#"><i class="fas fa-comment fa-2x"></i></a>
+                    <span class="badge badge-secondary position-absolute">15</span>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+              <div class="card-content pt-4">
+                <h6 class="card-subtitle mb-2 text-muted"><a href="#">{{ tip.author }}</a> on {{ tip.date_posted|date:"F d, Y" }}</h6>
+                <span>Prediction: <strong>{{ tip.prediction }}</strong></span><br>
+                <span>Odds: <strong>{{ tip.odds }}</strong></span><br>
+                <span>Analysis: <strong>{{ tip.analysis }}</strong></span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          {% include 'blog/pagination.html' %}
+        </div>
+      </div>
+    </div>
+    {% include 'blog/sidebar.html' %}
+  </div>
+</div>
+{% endblock content %}

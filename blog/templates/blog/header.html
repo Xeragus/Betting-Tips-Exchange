@@ -6,9 +6,6 @@
     </button>
     <div class="collapse navbar-collapse ml-5" id="navbarNav">
       <ul class="navbar-nav w-100 position-relative">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-            </li>
             {% if not user.is_authenticated %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -16,27 +13,21 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'register' %}">Register</a>
             </li>
-            {% else %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'profile' %}">Profile</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
             {% endif %}
             <!-- Example single danger button -->
+            {% if user.is_authenticated %}
             <div class="btn-group menu-user-dropdown">
               <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Mr. {{ user.get_username }}
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Profile Stats</a>
-                <a class="dropdown-item" href="#">Account Settings</a>
+                <a class="dropdown-item" href="{% url 'profile' %}">Account</a>
                 <a class="dropdown-item" href="#">Preferences</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Sign Out</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
               </div>
             </div>
+            {% endif %}
       </ul>
     </div>
   </div>

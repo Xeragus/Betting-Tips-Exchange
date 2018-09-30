@@ -1,18 +1,48 @@
 {% extends "blog/base.html" %}
 {% block content %}
-<div class="container py-5">
-  <div class="row justify-content-center">
+<div class="container">
+  <div class="row mt-5">
     <div class="col-sm-8">
-        <div class="d-flex align-items-center mb-3">
-          <img src="{{ object.author.profile.image.url }}" class="rounded-circle" style="width: 80px">
-          <h5 class="mb-0 ml-3">{{ object }}</h5>
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col-sm-8 d-flex align-items-center">
+              <a href="{% url 'profile-detail' object.author_id %}"><img src="{{ object.author.profile.image.url }}" class="rounded-circle" style="width: 80px"></a>
+              <h3 class="mb-0 ml-3">{{ object }}</h3>
+            </div>
+            {% if object.author == user %}
+            <div class="col-sm-4 d-flex justify-content-end">
+              <a class="mx-2" href="{% url 'tip-update' object.id %}"><i class="fas fa-edit fa-2x"></i></a>
+              <a class="mx-2" href="{% url 'tip-delete' object.id %}"><i class="fas fa-trash fa-2x"></i></a>
+            </div>
+            {% else %}
+            <div class="col-sm-4 d-flex justify-content-end like-comment-section">
+              <div class="position-relative mx-2">
+                <a class="mx-2" href="#"><i class="fas fa-thumbs-up fa-2x"></i></a>
+                <span class="badge badge-success position-absolute">51</span>
+              </div>
+              <div class="position-relative mx-2">
+                <a class="mx-2" href="#"><i class="fas fa-thumbs-down fa-2x"></i></a>
+                <span class="badge badge-danger position-absolute">44</span>
+              </div>
+              <div class="position-relative mx-2">
+                <a class="mx-2" href="#"><i class="fas fa-comment fa-2x"></i></a>
+                <span class="badge badge-secondary position-absolute">15</span>
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          <div class="card-content pt-3">
+            <hr>
+            <h6 class="card-subtitle mb-2 text-muted pt-3"><a href="#">{{ object.author }}</a> on {{ object.date_posted|date:"F d, Y" }}</h6>
+            <span>Prediction: <strong>{{ object.prediction }}</strong></span><br>
+            <span>Odds: <strong>{{ object.odds }}</strong></span><br>
+            <span>Analysis: <strong>{{ object.analysis }}</strong></span>
+          </div>
         </div>
-        <span>by <a href="#">{{ object.author }}</a> on {{ object.date_posted|date:"F d, Y" }}</span><br>
-        <hr>
-        <span>Prediction: <strong>{{ object.prediction }}</strong></span><br>
-        <span>Odds: <strong>{{ object.odds }}</strong></span><br>
-        <span>Analysis: <strong>{{ object.analysis }}</strong></span>
+      </div>
     </div>
+    {% include 'blog/sidebar.html' %}
   </div>
 </div>
 {% endblock content %}

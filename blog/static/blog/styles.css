@@ -1,4 +1,13 @@
 .menu-user-dropdown {
   position: absolute;
   right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.custom-sidebar {
+  z-index: 1;
+}
+.like-comment-section .badge {
+  right: -15px;
 }
